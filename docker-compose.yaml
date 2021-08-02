@@ -1,0 +1,17 @@
+version: "3.4"
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: hello-wine
+      POSTGRES_PASSWORD: 149bc0843e66afcabbd69d7eccf7120a
+      POSTGRES_DB: hello_wine_trial_development
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      HELLO_WINE_TRIAL_DATABASE_PASSWORD: 149bc0843e66afcabbd69d7eccf7120a
+      HELLO_WINE_TRIAL_DB_HOST: db
