@@ -31,7 +31,7 @@ RSpec.describe 'api/v1/users', type: :request do
         required: %w[email name]
       }
       response(201, 'Created') do
-        let(:user) { { email: 'e1@gmail.com', name: 'aaa' } }
+        let(:user) { build(:user) }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -52,7 +52,7 @@ RSpec.describe 'api/v1/users', type: :request do
     get('show user') do
       tags 'Users'
       response(200, 'successful') do
-        let(:id) { User.create(email: 'e22@mail.com', name: 'e22').id }
+        let(:id) { create(:user).id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -124,7 +124,7 @@ RSpec.describe 'api/v1/users', type: :request do
     delete('delete user') do
       tags 'Users'
       response(204, 'No Content') do
-        let(:id) { User.create(email: 'e224@mail.com', name: 'e224').id }
+        let(:id) { create(:user).id }
         run_test!
       end
     end

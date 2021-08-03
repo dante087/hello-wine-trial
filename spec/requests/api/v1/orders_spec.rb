@@ -35,7 +35,7 @@ RSpec.describe 'api/v1/orders', type: :request do
         required: %w[amount user_id]
       }
       response(201, 'Created') do
-        let(:order) { { amount: 59.99, user_id: User.create(email: 'e11@email.com', name: 'e11').id } }
+        let(:order) { build(:order, user: create(:user)) }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -56,7 +56,7 @@ RSpec.describe 'api/v1/orders', type: :request do
     get('show order') do
       tags 'Orders'
       response(200, 'successful') do
-        let(:id) { Order.create(amount: 22.3, user: User.create(email: 'userO@mail.com', name: 'userO')).id }
+        let(:id) { create(:order).id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -82,7 +82,7 @@ RSpec.describe 'api/v1/orders', type: :request do
         required: %w[amount status payment_status]
       }
       response(200, 'successful') do
-        let(:id) { Order.create(amount: 22.3, user: User.create(email: 'userO1@mail.com', name: 'userO1')).id }
+        let(:id) { create(:order, amount: 22.3, user: create(:user, email: 'userO1@mail.com', name: 'userO1')).id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -111,7 +111,7 @@ RSpec.describe 'api/v1/orders', type: :request do
       }
 
       response(200, 'successful') do
-        let(:id) { Order.create(amount: 22.3, user: User.create(email: 'userO2@mail.com', name: 'userO2')).id }
+        let(:id) { create(:order, amount: 22.3, user: create(:user, email: 'userO2@mail.com', name: 'userO1')).id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -129,7 +129,7 @@ RSpec.describe 'api/v1/orders', type: :request do
     delete('delete order') do
       tags 'Orders'
       response(204, 'No Content') do
-        let(:id) { Order.create(amount: 22.3, user: User.create(email: 'userO3@mail.com', name: 'userO3')).id }
+        let(:id) { create(:order).id }
 
         run_test!
       end
