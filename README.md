@@ -1,8 +1,8 @@
 # HelloWineTrial
 
-##Simple Web API to manage users and orders
+## Simple Web API to manage users and orders
 
-###Instructions to run api:
+### Instructions to run api:
 
 * Clone repository
 
