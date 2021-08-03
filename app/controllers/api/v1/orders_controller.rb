@@ -9,7 +9,7 @@ class Api::V1::OrdersController < ApplicationController
 
   # GET /orders/1
   def show
-    render json: Order.find(params[:id])
+    render json: @order
   end
 
   # POST /orders

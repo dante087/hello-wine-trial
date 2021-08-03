@@ -1,15 +1,15 @@
 class Order < ApplicationRecord
   belongs_to :user, inverse_of: :orders
-  validates :amount, numericality: { greater_than_or_equal_to: 0 }
+  validates :amount, numericality: { greater_than: 0 }
   validates :amount, presence: true
   validates :user, presence: true
 
   after_validation :set_delivery_date, :set_payment_date
 
   enum status: { received: 'Recibida', on_preparation: 'En preparación',
-                 on_delivery: 'En entrega', delivered: 'Entregada' }
+                 on_delivery: 'En reparto', delivered: 'Entregada' }
 
-  enum payment_status: { paid: 'Pagada', unpaid: 'No pagada', pending: 'Pendiente de pago' }
+  enum payment_status: { pending: 'Pendiente de pago', unpaid: 'No pagada', paid: 'Pagada' }
 
   scope :filter_by_delivery_date, lambda { |search_date|
     from_date = begin

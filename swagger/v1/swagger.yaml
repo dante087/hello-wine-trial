@@ -1,0 +1,241 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/orders":
+    get:
+      summary: list orders
+      tags:
+      - Orders
+      parameters:
+      - name: delivery_date
+        in: query
+        description: YYYY-mm-dd
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create order
+      tags:
+      - Orders
+      parameters: []
+      responses:
+        '201':
+          description: Created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                user_id:
+                  type: integer
+                status:
+                  type: string
+                  enum:
+                  - En preparación
+                  - En reparto
+                  - Entregada
+                  - Recibida
+                payment_status:
+                  type: string
+                  enum:
+                  - Pendiente de pago
+                  - No pagada
+                  - Pagada
+              required:
+              - amount
+              - user_id
+  "/api/v1/orders/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show order
+      tags:
+      - Orders
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update order
+      tags:
+      - Orders
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                status:
+                  type: string
+                  enum:
+                  - En preparación
+                  - En reparto
+                  - Entregada
+                  - Recibida
+                payment_status:
+                  type: string
+                  enum:
+                  - Pendiente de pago
+                  - No pagada
+                  - Pagada
+              required:
+              - amount
+              - status
+              - payment_status
+    put:
+      summary: update order
+      tags:
+      - Orders
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                status:
+                  type: string
+                  enum:
+                  - En preparación
+                  - En reparto
+                  - Entregada
+                  - Recibida
+                payment_status:
+                  type: string
+                  enum:
+                  - Pendiente de pago
+                  - No pagada
+                  - Pagada
+              required:
+              - amount
+              - status
+              - payment_status
+    delete:
+      summary: delete order
+      tags:
+      - Orders
+      responses:
+        '204':
+          description: No Content
+  "/api/v1/users":
+    get:
+      summary: list users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: Created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+              required:
+              - email
+              - name
+  "/api/v1/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+              required:
+              - email
+              - name
+    put:
+      summary: update user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                name:
+                  type: string
+              required:
+              - email
+              - name
+    delete:
+      summary: delete user
+      tags:
+      - Users
+      responses:
+        '204':
+          description: No Content
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
